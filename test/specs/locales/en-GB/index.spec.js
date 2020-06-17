@@ -43,7 +43,7 @@ describe("Locale en-GB", () => {
         expect(fakerator.address.streetName()).to.be.equal("Rosemarie Way");
         expect(fakerator.address.buildingNumber()).to.be.equal("166");
         expect(fakerator.address.postCode()).to.be.equal("pz64 0yd");
-        expect(fakerator.address.state()).to.be.equal("Lancashire");
+        expect(fakerator.address.county()).to.be.equal("Lancashire");
         expect(fakerator.address.country()).to.be.equal("Bangladesh");
     });
 
@@ -75,10 +75,10 @@ describe("Locale en-GB", () => {
 
         expect(user.address).to.have.property("country").an("String");
         expect(user.address).to.have.property("countryCode").an("String").length(2);
-        expect(user.address).to.have.property("state").an("String");
+        expect(user.address).to.have.property("county").an("String");
         expect(user.address).to.have.property("city").an("String");
         expect(user.address).to.have.property("street").an("String");
-        expect(user.address).to.have.property("zip").an("String");
+        expect(user.address).to.have.property("postCode").an("String");
 
     });
 

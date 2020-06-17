@@ -4747,7 +4747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 
 
-		state: __webpack_require__(142),
+		county: __webpack_require__(142),
 
 		city: __webpack_require__(143),
 
@@ -14115,10 +14115,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			return {
 				country: def.country || country.name,
 				countryCode: def.countryCode || country.code,
-				state: def.state || this.address.state(),
+				county: def.state || this.address.state(),
 				city: def.city || this.address.city(),
 				street: def.street || this.address.street(),
-				zip: def.zip || this.address.postCode(),
+				postCode: def.zip || this.address.postCode(),
 				geo: def.geo || this.address.geoLocation()
 			};
 		},
@@ -14376,7 +14376,71 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 238 */
 213,
 /* 239 */
-219,
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+		address: function address() {
+			var def = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			var country = this.address.countryAndCode();
+			return {
+				country: def.country || country.name,
+				countryCode: def.countryCode || country.code,
+				state: def.state || this.address.state(),
+				city: def.city || this.address.city(),
+				street: def.street || this.address.street(),
+				zip: def.zip || this.address.postCode(),
+				geo: def.geo || this.address.geoLocation()
+			};
+		},
+		user: function user(gender) {
+
+			var firstName = this.populate("#{names.firstName" + (gender ? gender.toUpperCase() : "") + "}");
+			var lastName = this.populate("#{names.lastName" + (gender ? gender.toUpperCase() : "") + "}");
+
+			return {
+				firstName: firstName,
+				lastName: lastName,
+				userName: this.internet.userName(firstName, lastName),
+				password: this.internet.password(),
+				email: this.internet.email(firstName, lastName),
+				phone: this.phone.number(),
+				dob: this.date.past(80),
+				website: this.internet.url(),
+				ip: this.internet.ip(),
+				avatar: this.internet.avatar(),
+				gravatar: this.internet.gravatar(),
+				address: this.entity.address(),
+				status: this.random.boolean()
+			};
+		},
+		company: function company(name) {
+			name = name || this.company.name();
+
+			return {
+				name: name,
+				email: this.internet.email(name),
+				phone: this.phone.number(),
+				website: this.internet.url(),
+				ip: this.internet.ip(),
+				address: this.entity.address()
+			};
+		},
+		post: function post() {
+			var paragraphs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;
+
+			return {
+				title: this.lorem.sentence(),
+				keywords: this.utimes(this.lorem.word, 3),
+				created: this.date.recent(7),
+				content: this.times(this.lorem.paragraph, paragraphs).join("\r\n")
+			};
+		}
+	};
+
+/***/ },
 /* 240 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__, __webpack_module_template_argument_3__) {
 
